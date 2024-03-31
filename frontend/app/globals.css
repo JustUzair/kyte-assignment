@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Name: custom color palette
+           Author: Ilias Ism
+           URL: https://gradient.page */
+
+    /* CSS: .bg-gradient { background: var(--gradient) } */
+    --gradient: #1e130c;
+    --background: 25 97.15% 98.16%;
+    --foreground: 25 4.3% 0.32%;
+
+    --muted: 25 4.3% 90.8%;
+    --muted-foreground: 25 2.15% 40.8%;
+
+    --popover: 25 55.6% 90.8%;
+    --popover-foreground: 25 4.3% 0.4%;
+
+    --card: 25 55.6% 90.8%;
+    --card-foreground: 25 4.3% 0.4%;
+
+    --border: 25 9.3% 89.32%;
+    --input: 25 9.3% 89.32%;
+
+    --primary: 25 43% 8%;
+    --primary-foreground: 25 0.86% 90.8%;
+
+    --secondary: 25 2.15% 95.4%;
+    --secondary-foreground: 25 3.58% 10.8%;
+
+    --accent: 25 2.15% 95.4%;
+    --accent-foreground: 25 3.58% 10.8%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --ring: 25 43% 8%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Name: custom color palette
+       Author: Ilias Ism
+       URL: https://gradient.page */
+
+    /* CSS: .bg-gradient { background: var(--gradient) } */
+    --gradient: #667eea;
+
+    --background: 243 49.4% 5.28%;
+    --foreground: 243 7.6% 98.3%;
+
+    --muted: 243 38% 19.8%;
+    --muted-foreground: 243 7.6% 56.6%;
+
+    --popover: 243 49.8% 8.58%;
+    --popover-foreground: 243 7.6% 98.3%;
+
+    --card: 243 49.8% 8.58%;
+    --card-foreground: 243 7.6% 98.3%;
+
+    --border: 243 38% 19.8%;
+    --input: 243 38% 19.8%;
+
+    --primary: 243 76% 66%;
+    --primary-foreground: 243 7.6% 6.6000000000000005%;
+
+    --secondary: 243 38% 19.8%;
+    --secondary-foreground: 243 7.6% 98.3%;
+
+    --accent: 243 38% 19.8%;
+    --accent-foreground: 243 7.6% 98.3%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 243 7.6% 98.3%;
+
+    --ring: 243 76% 66%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
