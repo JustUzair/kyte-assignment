@@ -89,7 +89,7 @@ const NFTDialog = ({ collection }: Props) => {
         //       body: formData,
         //     })
         //   ).json();
-        const res = saveMintedNFT(formData);
+        const res = await saveMintedNFT(formData);
         console.log(res);
 
         toast.success(`${res.message}`);

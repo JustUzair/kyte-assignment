@@ -116,7 +116,7 @@ const CollectionsPage = (props: Props) => {
         console.log(res);
 
         toast.success(`${res.message}`);
-        // location.reload();
+        location.reload();
       }
     } catch (err) {
       toast.error(err.message);
