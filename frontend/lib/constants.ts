@@ -1,2 +1,2 @@
 export const CollectionMasterContract =
-  "0xefF606E4a06DCfe41d0c61F0751553Dec114b898";
+  "0xB471C0f541AD35c79949f6AaFD1D8EB113c486Ea";

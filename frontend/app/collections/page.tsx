@@ -77,28 +77,36 @@ const CollectionsPage = (props: Props) => {
         return;
       }
 
-      const txHash = await writeContractAsync({
-        abi,
-        address: CollectionMasterContract,
-        functionName: "createCollection",
-        args: [tokenName, tokenSymbol, tokenURI],
-      });
+      //   const txHash = await writeContractAsync({
+      //     abi,
+      //     address: CollectionMasterContract,
+      //     functionName: "createCollection",
+      //     args: [tokenName, tokenSymbol, tokenURI],
+      //   });
 
       const masterContractInstance = new web3.eth.Contract(
         abi,
         CollectionMasterContract
       );
+
+      const createRes = await masterContractInstance.methods
+        .createCollection(tokenName, tokenSymbol, tokenURI)
+        .send({ from: address });
+      console.log(createRes);
+
       const collectionsResult = await masterContractInstance.methods
         .getCollections(address)
         .call();
       // console.log("use effect hook web3 \n", collectionsResult);
 
-      if (collectionsResult) {
+      if (createRes && collectionsResult) {
         const formData = new FormData();
         formData.append("tokenName", tokenName);
         formData.append("tokenSymbol", tokenSymbol);
         // formData.append("tokenURI", tokenURI);
         formData.append("walletAddress", address);
+        console.log(collectionsResult);
+
         formData.append(
           "collectionAddress",
           collectionsResult[collectionsResult.length - 1]
@@ -108,7 +116,7 @@ const CollectionsPage = (props: Props) => {
         console.log(res);
 
         toast.success(`${res.message}`);
-        location.reload();
+        // location.reload();
       }
     } catch (err) {
       toast.error(err.message);

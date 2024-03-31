@@ -92,8 +92,10 @@ const NFTDialog = ({ collection }: Props) => {
         const res = saveMintedNFT(formData);
         console.log(res);
 
-        router.push("/my-nfts");
         toast.success(`${res.message}`);
+        setTimeout(() => {
+          router.push("/my-nfts");
+        }, 1000);
       }
     } catch (err) {
       toast.error(err.message);
