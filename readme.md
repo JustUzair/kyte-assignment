@@ -43,6 +43,7 @@
 
 ### Add variables to .env in `frontend` folder
 
+- use this URL for `DATABASE` - `mongodb+srv://justuzair:Test%4012345@cluster0.dzvpvfg.mongodb.net/kyte-test`
 - ```bash
   DATABASE=mongoDB-URL/database
   DATABASE_PASSWORD=mongodb-password
