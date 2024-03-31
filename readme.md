@@ -2,7 +2,7 @@
 
 # Watch DEMO Video
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/2UtbZqrcL8s?si=EnXc5wfff42gelsf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+[![IMAGE ALT TEXT](http://img.youtube.com/vi/2UtbZqrcL8s/0.jpg)](https://youtu.be/2UtbZqrcL8s?si=4L-P1tQ_6SC3KtEJ "Video Title")
 
 ## Backend (Smart Contracts):
 
