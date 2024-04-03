@@ -119,6 +119,8 @@ const CollectionsPage = (props: Props) => {
         location.reload();
       }
     } catch (err) {
+      // @ts-ignore
+
       toast.error(err.message);
     }
   }

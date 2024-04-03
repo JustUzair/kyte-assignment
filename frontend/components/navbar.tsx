@@ -119,54 +119,6 @@ export const Navbar = () => {
               variants={fadeInAnimationVariants}
             >
               {Links.slice(0, 2).map((link, index) => {
-                if (link?.subLinks) {
-                  return (
-                    <DropdownMenu key={index}>
-                      <DropdownMenuTrigger asChild>
-                        <motion.span
-                          variants={fadeInAnimationVariants}
-                          initial="initial"
-                          animate="animate"
-                          exit={"end"}
-                        >
-                          <Link
-                            href={link.href}
-                            className="bg-secondary !text-white"
-                          >
-                            <span
-                              style={{
-                                color: "white",
-                              }}
-                            >
-                              {link.name}
-                            </span>
-                          </Link>
-                        </motion.span>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent className="mt-1 ml-2" align="end">
-                        {!!link.subLinks &&
-                          link.subLinks.map((subLink, index) => {
-                            return (
-                              <DropdownMenuItem
-                                key={index}
-                                className="transition-all"
-                              >
-                                <Link
-                                  className="font-medium flex items-center justify-between w-[100%]"
-                                  href={subLink.href}
-                                  target="_blank"
-                                >
-                                  {subLink.name}
-                                  <span>{subLink.icon}</span>
-                                </Link>
-                              </DropdownMenuItem>
-                            );
-                          })}
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  );
-                }
-
                 return (
                   <motion.span key={index}>
                     <Link
@@ -180,44 +132,6 @@ export const Navbar = () => {
                   </motion.span>
                 );
               })}
-              {/* <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <motion.span
-                    variants={fadeInAnimationVariants}
-                    initial="initial"
-                    animate="animate"
-                    exit={"end"}
-                  >
-                    <Button
-                      variant="outline"
-                      size="default"
-                      className="
-                      p-2 rounded-lg bg-transparent dark:bg-transparent border border-white dark:border-white 
-                      "
-                    >
-                      <MoreVertical />
-                    </Button>
-                  </motion.span>
-                </DropdownMenuTrigger>
-               <DropdownMenuContent className="dark:bg-zinc-900 " align="end"> 
-                <DropdownMenuContent align="end" className="dark:bg-zinc-900">
-                  {Links.slice(2, Links.length).map((link, index) => (
-                    <DropdownMenuItem
-                      key={index}
-                      className="hover:bg-zinc-900 transition-all"
-                    >
-                      <Link href={link.href}>{link.name}</Link>
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-                </DropdownMenuContent>
-
-              </DropdownMenu> */}
-              {/* <ModeToggle
-                className={
-                  "ml-2 p-2 rounded-lg bg-transparent dark:bg-transparent border border-white dark:border-white"
-                }
-              /> */}
             </motion.div>
 
             <motion.span
@@ -317,30 +231,6 @@ export const Navbar = () => {
           <div className="flex flex-col w-[100%] flex-grow">
             <div className="flex flex-col grow p-5 justify-around">
               {Links.map((link, index) => {
-                if (link.subLinks) {
-                  return link.subLinks.map((subLink, index) => {
-                    return (
-                      <Link
-                        href={subLink.href}
-                        className="mx-10 cursor-pointer p-5 rounded-sm duration-300 font-semibold dark:hover:bg-zinc-700 hover:bg-gray-200 transition-all "
-                        target="_blank"
-                        key={index}
-                      >
-                        <motion.span
-                          onClick={() => {
-                            setIsCollapsed(true);
-                          }}
-                          className="flex items-center justify-between"
-                        >
-                          {subLink.name}
-                          <span className="justify-self-end">
-                            {subLink.icon}
-                          </span>
-                        </motion.span>
-                      </Link>
-                    );
-                  });
-                }
                 return (
                   <motion.span
                     // href={link.href}
@@ -385,8 +275,4 @@ export const Navbar = () => {
         </motion.div>
       </>
     );
-
-  // if (!isLoaded) {
-  //   return <Spinner size={"lg"} />;
-  // }
 };

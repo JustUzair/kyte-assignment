@@ -1,45 +1,30 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Spinner } from "@/components/spinner";
-import {
-  useAccount,
-  useDisconnect,
-  useEnsAvatar,
-  useEnsName,
-  useAccountEffect,
-  useWriteContract,
-  useReadContract,
-} from "wagmi";
+import { useAccount } from "wagmi";
 import { getNFTForUser } from "@/lib/queries";
-
-type Props = {};
-
-const MyNFTs = (props: Props) => {
+import { toast } from "sonner";
+const MyNFTs = () => {
   const { address } = useAccount();
-  const [nfts, setNfts] = useState([]);
+  const [nfts, setNfts] = useState<any[]>([]);
   const [loaded, setIsLoaded] = useState(false);
   useEffect(() => {
     setIsLoaded(true);
   }, []);
+  async function getMyNFTs() {
+    if (!address) {
+      toast.error(
+        "You may not be connected, please connect wallet to continue"
+      );
+    }
+    const res = await getNFTForUser(`${address}`);
+    console.log(res);
+    setNfts(res.nfts);
+  }
 
   useEffect(() => {
     if (!address || !loaded) return;
     if (address) {
-      async function getMyNFTs() {
-        const formData = new FormData();
-
-        formData.append("walletAddress", address);
-
-        // const res = await (
-        //   await fetch(`/api/minters?walletAddress=${address}`, {
-        //     method: "GET",
-        //   })
-        // ).json();
-
-        const res = await getNFTForUser(address);
-        console.log(res);
-        setNfts(res.nfts);
-      }
       getMyNFTs();
     }
   }, [address, loaded]);
@@ -57,6 +42,7 @@ const MyNFTs = (props: Props) => {
             >
               <span className="break-words">
                 <span className="font-semibold">NFT Collection Address</span> :{" "}
+                {/* @ts-ignore */}
                 {nft.collectionAddress}
               </span>
               <br />

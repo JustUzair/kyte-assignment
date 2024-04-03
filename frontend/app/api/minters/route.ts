@@ -1,9 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { dbConnect, disconnect } from "../../lib/db";
-// @ts-ignore
 import Minter from "../../models/Minter";
-import { Web3 } from "web3";
-import ERC721Minter from "../../../artifacts/ERC721Minter.json";
 
 export async function GET(req: NextRequest) {
   try {
@@ -24,12 +21,16 @@ export async function GET(req: NextRequest) {
         status: 200,
       }
     );
-  } catch (err: any) {
+  } catch (err) {
+    // @ts-ignore
+
     console.log("🔴", err.message);
 
     return NextResponse.json(
       {
         message: "error",
+        // @ts-ignore
+
         errorData: `🔴 🔴 ${err.message}`,
       },
       {
@@ -69,12 +70,16 @@ export async function POST(req: NextRequest) {
         status: 200,
       }
     );
-  } catch (err: any) {
+  } catch (err) {
+    // @ts-ignore
+
     console.log("🔴", err.message);
 
     return NextResponse.json(
       {
         message: "error",
+        // @ts-ignore
+
         errorData: `🔴 🔴 ${err.message}`,
       },
       {

@@ -1,5 +1,4 @@
-const mongoose = require("mongoose");
-
+import mongoose from "mongoose";
 const collectionSchema = new mongoose.Schema({
   tokenName: { type: String, required: true },
   tokenSymbol: { type: String, required: true },
@@ -7,5 +6,8 @@ const collectionSchema = new mongoose.Schema({
   collectionAddress: { type: String, required: true },
 });
 
-module.exports =
-  mongoose.models.Collection || mongoose.model("Collection", collectionSchema);
+// module.exports =
+//   mongoose.models.Collection || mongoose.model("Collection", collectionSchema);
+
+export default mongoose.models.Collection ||
+  mongoose.model("Collection", collectionSchema);

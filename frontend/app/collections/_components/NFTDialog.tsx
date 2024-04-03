@@ -2,31 +2,12 @@
 
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import ERC721Minter from "@/artifacts/ERC721Minter.json";
-import CustomNFT from "@/artifacts/CustomNFT.json";
 
 import { CollectionMasterContract } from "@/lib/constants";
 import { toast } from "sonner";
-import {
-  useAccount,
-  useDisconnect,
-  useEnsAvatar,
-  useEnsName,
-  useAccountEffect,
-  useWriteContract,
-  useReadContract,
-} from "wagmi";
+import { useAccount } from "wagmi";
 import { Spinner } from "@/components/spinner";
 import Web3 from "web3";
 import { useRouter } from "next/navigation";
@@ -44,7 +25,7 @@ const NFTDialog = ({ collection }: Props) => {
   const { address } = useAccount();
   const router = useRouter();
   const web3 = new Web3(window.ethereum);
-  const [tokenId, setTokenId] = useState(-1);
+  //   const [tokenId, setTokenId] = useState(-1);
   const [loaded, setIsLoaded] = useState(false);
 
   async function mintNFT() {
@@ -74,21 +55,24 @@ const NFTDialog = ({ collection }: Props) => {
 
       if (collectionsResult) {
         const formData = new FormData();
+        if (!collectionsResult.events) {
+          toast.error("Didn't receive nft data to push to db");
+          return;
+        }
         formData.append(
           "tokenId",
-          collectionsResult.events.NFTMinted.returnValues[2]
+          collectionsResult?.events.NFTMinted
+            .returnValues[2] as unknown as string
         );
-
-        formData.append("owner", address);
+        if (!address) {
+          toast.error(
+            "You may not have connected your wallet, please connect and try again."
+          );
+          return;
+        }
+        formData.append("owner", address.toString());
         formData.append("collectionAddress", collection.collectionAddress);
 
-        // call api, get response, convert it to json, read json
-        //   const res = await (
-        //     await fetch(`/api/minters`, {
-        //       method: "POST",
-        //       body: formData,
-        //     })
-        //   ).json();
         const res = await saveMintedNFT(formData);
         console.log(res);
 
@@ -98,24 +82,25 @@ const NFTDialog = ({ collection }: Props) => {
         }, 1000);
       }
     } catch (err) {
+      // @ts-ignore
       toast.error(err.message);
     }
   }
 
-  async function getTokenID() {
-    const collectionInstance = new web3.eth.Contract(
-      CustomNFT.abi,
-      collection.collectionAddress
-    );
-    const newTokenID = await collectionInstance.methods
-      .getCurrentTokenId()
-      .call();
-    // const tokenURI = await collectionInstance.methods.tokenURI(tokenId).call();
-    console.log(newTokenID);
-    setTokenId(newTokenID);
+  //   async function getTokenID() {
+  //     const collectionInstance = new web3.eth.Contract(
+  //       CustomNFT.abi,
+  //       collection.collectionAddress
+  //     );
+  //     const newTokenID = await collectionInstance.methods
+  //       .getCurrentTokenId()
+  //       .call();
+  //     // const tokenURI = await collectionInstance.methods.tokenURI(tokenId).call();
+  //     console.log(newTokenID);
+  //     setTokenId(newTokenID);
 
-    return newTokenID;
-  }
+  //     return newTokenID;
+  //   }
 
   useEffect(() => {
     setIsLoaded(true);

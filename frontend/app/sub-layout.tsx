@@ -41,7 +41,6 @@ export const SubLayout = ({ children }: { children: React.ReactNode }) => {
     transports: {
       [optimismSepolia.id]: http(),
     },
-    autoConnect: true,
     connectors: [
       injected(),
       walletConnect({ projectId: "d4fd71715f9b4ef3585dde48ca2e9572" }),

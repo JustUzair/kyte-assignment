@@ -1,22 +1,22 @@
 import mongoose, { Mongoose } from "mongoose";
 
-global.mongoose = {
+(global as any).mongoose = {
   conn: null,
   promise: null,
 };
 
 export async function dbConnect() {
   try {
-    const DB = process.env.DATABASE;
-    if (global.mongoose && global.mongoose.conn) {
+    const DB = process.env.DATABASE || "";
+    if ((global as any).mongoose && (global as any).mongoose.conn) {
       console.log("Connected from previous");
-      return global.mongoose.conn;
+      return (global as any).mongoose.conn;
     } else {
       const promise = mongoose.connect(DB, {
         autoIndex: true,
       });
 
-      global.mongoose = {
+      (global as any).mongoose = {
         conn: await promise,
         promise,
       };
@@ -31,9 +31,9 @@ export async function dbConnect() {
 }
 
 export const disconnect = () => {
-  if (!global.mongoose.conn) {
+  if (!(global as any).mongoose.conn) {
     return;
   }
-  global.mongoose.conn = null;
+  (global as any).mongoose.conn = null;
   mongoose.disconnect();
 };
